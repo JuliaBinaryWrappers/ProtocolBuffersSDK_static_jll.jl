@@ -4,14 +4,24 @@ export libprotobuf, libprotobuf_lite, libprotobuf_lite_pkgconfig, libprotobuf_pk
 using CompilerSupportLibraries_jll
 using Zlib_jll
 JLLWrappers.@generate_wrapper_header("ProtocolBuffersSDK_static")
+JLLWrappers.@declare_executable_product(protoc)
+JLLWrappers.@declare_file_product(libprotoc)
 JLLWrappers.@declare_file_product(libprotobuf)
 JLLWrappers.@declare_file_product(libprotobuf_lite)
-JLLWrappers.@declare_file_product(libprotobuf_lite_pkgconfig)
 JLLWrappers.@declare_file_product(libprotobuf_pkgconfig)
-JLLWrappers.@declare_file_product(libprotoc)
-JLLWrappers.@declare_executable_product(protoc)
+JLLWrappers.@declare_file_product(libprotobuf_lite_pkgconfig)
 function __init__()
     JLLWrappers.@generate_init_header(CompilerSupportLibraries_jll, Zlib_jll)
+    JLLWrappers.@init_executable_product(
+        protoc,
+        "bin\\protoc.exe",
+    )
+
+    JLLWrappers.@init_file_product(
+        libprotoc,
+        "lib\\libprotoc.a",
+    )
+
     JLLWrappers.@init_file_product(
         libprotobuf,
         "lib\\libprotobuf.a",
@@ -23,23 +33,13 @@ function __init__()
     )
 
     JLLWrappers.@init_file_product(
-        libprotobuf_lite_pkgconfig,
-        "lib\\pkgconfig\\protobuf-lite.pc",
-    )
-
-    JLLWrappers.@init_file_product(
         libprotobuf_pkgconfig,
         "lib\\pkgconfig\\protobuf.pc",
     )
 
     JLLWrappers.@init_file_product(
-        libprotoc,
-        "lib\\libprotoc.a",
-    )
-
-    JLLWrappers.@init_executable_product(
-        protoc,
-        "bin\\protoc.exe",
+        libprotobuf_lite_pkgconfig,
+        "lib\\pkgconfig\\protobuf-lite.pc",
     )
 
     JLLWrappers.@generate_init_footer()
